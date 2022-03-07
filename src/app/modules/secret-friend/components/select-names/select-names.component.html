@@ -1,0 +1,51 @@
+<div class="select-names-container">
+  <div>
+    <h1 class="main-title">Nomes</h1>
+    <p class="total-names" *ngIf="!creating">
+      Total de nomes: {{ names.length }}
+    </p>
+
+    <div class="name-container new" *ngIf="creating">
+      <input
+        type="text"
+        #input
+        [(ngModel)]="inputValue"
+        placeholder="Adicione um nome"
+        (keypress)="onKeyPress($event)"
+      />
+    </div>
+
+    <div class="names-container">
+      <div class="name-container" *ngFor="let name of names; let i = index">
+        {{ name }}
+        <span class="remove-name" (click)="excluirNome(i)" *ngIf="creating"
+          >+</span
+        >
+        <button
+          class="send-button"
+          *ngIf="!creating"
+          (click)="sendLink(i)"
+        >
+          <span>Exibir resultado</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="add-button" [class.finalizing]="!creating" (click)="onAddClick()">
+    <span *ngIf="creating">+</span>
+    <img
+      class="edit-icon"
+      *ngIf="!creating"
+      src="../../../../../assets/icons/pen-solid.svg"
+    />
+  </div>
+  <div
+    class="finalize-button"
+    [class.finalizing]="!creating"
+    (click)="onFinalizeClick()"
+  >
+    ✓
+  </div>
+  <div class="light"></div>
+</div>
